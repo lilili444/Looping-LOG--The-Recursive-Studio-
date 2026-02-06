@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Service Unavailable</title>
+    <style>
+        :root {
+            --cloud-blue: #ffffff;
+            --error-red: #dc3545;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--cloud-blue);
+            font-family: system-ui, -apple-system, sans-serif;
+            text-align: center;
+            cursor: not-allowed;
+        }
+
+        .error-container {
+            max-width: 600px;
+            padding: 2rem;
+        }
+
+        .status-code {
+            font-size: 6rem;
+            font-weight: 800;
+            color: var(--error-red);
+            margin: 0;
+            line-height: 1;
+        }
+
+        .cloud-icon {
+            width: 120px;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        .retry-info {
+            color: #666;
+            margin-top: 2rem;
+            border-top: 1px solid #ddd;
+            padding-top: 1.5rem;
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 4px;
+            background: #ddd;
+            margin: 2rem auto;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress {
+            width: 0%;
+            height: 100%;
+            background: var(--error-red);
+            transition: width 60s linear;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <!-- 动态生成的SVG云图标 -->
+        <svg class="cloud-icon" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M19.35 10.03A7.49 7.49 0 0 0 12 4C9.11 4 6.6 5.64 5.35 8.03A6.004 6.004 0 0 0 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.97z"/>
+        </svg>
+        
+        <h1 class="status-code" id="statusCode">503</h1>
+        <p>Service Temporarily Unavailable</p>
+        
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        
+        <div class="retry-info">
+            Automatic recovery in <span id="countdown">60</span> seconds
+        </div>
+    </div>
+
+    <script>
+        // 随机显示不同错误状态码
+        const errors = [
+            { code: 500, message: "Internal Server Error" },
+            { code: 503, message: "Service Unavailable" },
+            { code: 504, message: "Gateway Timeout" }
+        ];
+        
+        const error = errors[Math.floor(Math.random() * errors.length)];
+        document.getElementById('statusCode').textContent = error.code;
+        document.querySelector('p').textContent = error.message;
+
+
+        // 动态进度条
+        document.getElementById('progress').style.width = '100%';
+
+        // 倒计时逻辑
+        let seconds = 60;
+        const countdownEl = document.getElementById('countdown');
+        const timer = setInterval(() => {
+            seconds--;
+            countdownEl.textContent = seconds;
+            if(seconds <= 0) {
+                clearInterval(timer);
+                window.location.href = [
+                    '1notion.html',
+                    '2email.html',
+                    '3figma.html', 
+                    '4p5js.html', 
+                    '5chatgpt.html', 
+                    '6words.html', 
+                    '7canvas.html', 
+                    '8miro.html', 
+                ][Math.floor(Math.random()*3)];
+            }
+        }, 1000);
+    </script>
+
+    <script src="../common.js"></script>
+
+</body>
+</html>

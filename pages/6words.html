@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../common.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Looping Log</title>
+  <style>
+    /* 新的全局样式 */
+    html, body {
+      overflow: hidden;   /* 禁用全局滚动 */
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* 背景图片设置 */
+    body {
+      background: 
+        linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)),
+        url('../backgrounds/6words.png') no-repeat center center fixed;
+      background-color: #f0f0f0;
+      background-size: cover;
+      font-family: serif;
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-start;
+    }
+    
+    /* 新增容器包装 */
+    .ghost-container {
+      position: relative;
+      width: 45%;
+      height: 50%;
+      min-width: 400px;
+      min-height: 100vh; /* 新增 */
+      padding: 40px 5%;
+      backdrop-filter: blur(0px);
+      overflow-y: hidden;
+      position: absolute;
+      right: 24%;
+      top: 20%;
+    }
+    
+    /* 调整内容容器 */
+    .container {
+      overflow: visible;
+      height: auto;
+      width: 100%;
+      right: 5vh;
+      background: rgba(255, 255, 255, 0);
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 30px rgba(0,0,0,0);
+      line-height: 1.4;
+      font-family: 'DengXian', sans-serif;
+      padding-bottom: 60px;
+    }
+    /* ▼ 新增幽灵文本的样式 ▼ */
+    .typing-section {
+      background-color: rgba(0, 0, 0, 0.1);
+      padding: 0px 1px;
+      border-radius: 0px;
+      display: inline-block; /* 确保背景包裹文本 */
+    }
+
+    /* 动态光标（可选） */
+    @keyframes blink-caret {
+      from, to { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    
+
+    .typing-section::after {
+      content: "|";
+      color: #333;
+      animation: blink-caret 1s step-end infinite; /* 关键修改 */
+    }
+  
+    /* 响应式调整优化 */
+    @media (max-width: 768px) {
+      .ghost-container {
+        width: 100%;
+        min-height: auto;  /* 移动端取消强制高度 */
+        min-width: auto;
+        padding: 20px;
+      }
+      
+      body {
+        justify-content: center; /* 原为flex-end */
+        overflow: auto;
+      }
+      
+      .container {
+        padding: 20px;
+      }
+    }
+    input-section {
+      position: sticky;
+      bottom: 0;
+      background: rgba(255,255,255,0.9);
+      z-index: 100;
+    }
+
+    input[type="text"] {
+      /* 基础尺寸 */
+      width: 50%;
+      height: 10px;
+      padding: 1rem 1.5rem;
+
+      /* 文字样式 */
+      font-size: 1.1rem;
+      line-height: 1.6;
+
+      /* 边框与背景 */
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.98);
+  
+      /* 过渡动画 */
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+      /* 聚焦状态 */
+      &:focus {
+        height: 32px;
+        border-color: #f99090;
+        box-shadow: 0 2px 8px rgba(144, 202, 249, 0.3);
+        outline: none;
+      }   
+    }
+
+    /* 移动端优化 */
+    @media (max-width: 960px) {
+      .input-section {
+        padding: 0 1rem; /* 两侧留白 */
+      }
+      .ghost-container {
+        overflow: visible;
+        min-height: auto;
+      }
+
+      input[type="text"] {
+        height: 48px;
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+    
+        &:focus {
+          height: 52px;
+        }
+      } 
+    }
+    </style>
+</head>
+<body>
+  <!-- 保持原有HTML结构 -->
+  <div class="ghost-container">
+    <div class="container">
+
+      
+      <p>In recent years, the rise of artificial intelligence (AI) has reshaped the media, entertainment, and cultural industries, bringing both innovation and disruption. Nowhere is this transformation more evident than in the short-form video ecosystem, especially on platforms like TikTok. These platforms, originally built for quick entertainment, have become powerful engines of content production, algorithmic distribution, and audience engagement. At the heart of this shift is the growing integration of AI—from recommendation systems to content creation tools—which has restructured how media is made and consumed. </p>
+    
+      <p>For many creators, this change is not merely technological but emotional. As AI becomes capable of writing scripts, generating images, composing music, and even creating entire influencer personas, human creatives find themselves caught in a paradox. They are encouraged—or even forced—to use AI tools to stay visible in an oversaturated market, while simultaneously witnessing these tools erode their own professional identities. Anxiety, burnout, and a sense of replacement are becoming commonplace among independent artists, writers, and performers. Many feel trapped in a race they cannot win, constantly adapting to shifting algorithms, content trends, and monetization schemes. This “creative precarity” is deepened by AI’s ability to mimic human styles without attribution, often trained on datasets built from copyrighted or unpaid human work. The result is a crisis not just of labor, but of authorship, dignity, and expression. </p>
+      
+      <!-- ...其他段落保持不变... -->
+
+      <div class="input-section">
+        <p><strong>Write a thought(<30 words)and press ENTER to add it to the loop:</strong></p>
+        <input type="text" id="userInput" placeholder="Your sentence here...">
+      </div>
+      
+    </div>
+  </div>
+
+  <script src="../common.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', initGhost);
+  </script>
+
+<button class="jump-button" onclick="randomJump()">Exit</button>
+
+</body>
+</html>
