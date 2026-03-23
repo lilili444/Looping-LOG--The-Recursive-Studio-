@@ -7,52 +7,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Looping Log</title>
   <style>
-    /* 新的全局样式 */
     html, body {
-      overflow: hidden;   /* 禁用全局滚动 */
+      overflow: hidden;
       height: 100%;
       margin: 0;
       padding: 0;
     }
     
-    /* 背景图片设置 */
     body {
-      background: 
-        linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)),
-        url('../backgrounds/7canvas.png') no-repeat center center fixed;
       background-color: #f0f0f0;
-      background-size: cover;
       font-family: Calibri, sans-serif;
-      display: flex;
-      justify-content: flex-end;
-      align-items: flex-start;
     }
     
-     /* 新增容器包装 */
     .ghost-container {
-      position: relative;  /* 为子元素 absolute 定位提供基准 */
-      width: 57%;
-      height: 70%;
-      min-width: 300px;
-      min-height: 100px;
-      padding: 1px;
-      backdrop-filter: blur(0px);
-      overflow-y: hidden;
-      overflow-x: hidden;
       position: absolute;
-      right: 7%;
-      top: 15%;
+      top: 200px;
+      right: 134px;
+      width: 1094px;
+      height: 756px;
+      padding: 10px;
+      overflow: hidden;
     }
 
     
     /* 调整内容容器 */
     .container {
       overflow: visible;
-      height: 100%;
       width: 100%;
-      right: 5vh;
-      margin-top: 0;
-      top: -10vh;
       background: rgba(255, 255, 255, 0);
       color: #ffffff;
       padding: 1px;
@@ -60,18 +41,16 @@
       box-shadow: 0 0 30px rgba(0,0,0,0);
       line-height: 1.4;
       font-family: 'Inter', sans-serif;
-      font-size: 1rem;
+      font-size: 1.15rem;
       padding-bottom: 5px;
     }
-    /* ▼ 新增幽灵文本的样式 ▼ */
     .typing-section {
       background-color: rgba(255, 255, 255, 0.2);
       padding: 0px 1px;
       border-radius: 0px;
-      display: inline-block; /* 确保背景包裹文本 */
+      display: inline-block;
     }
 
-    /* 动态光标（可选） */
     @keyframes blink-caret {
       from, to { opacity: 1; }
       50% { opacity: 0; }
@@ -84,20 +63,7 @@
       animation: blink-caret 1s step-end infinite; /* 关键修改 */
     }
   
-    /* 响应式调整优化 */
     @media (max-width: 768px) {
-      .ghost-container {
-        width: 100%;
-        min-height: auto;  /* 移动端取消强制高度 */
-        min-width: auto;
-        padding: 10px;
-      }
-      
-      body {
-        justify-content: center; /* 原为flex-end */
-        overflow: auto;
-      }
-      
       .container {
         padding: 20px;
       }
@@ -161,27 +127,26 @@
     </style>
 </head>
 <body>
-  <!-- 保持原有HTML结构 -->
-  <div class="ghost-container">
-    <div class="container">
-      <h1>My part</h1>
-      <p>Arrangement And Communication: The arrangement and the communication are not good in the whole processing. The deadlines were not clear and effective enough for procrastinating group members, which slowed down the progress of the entire animation. In addition, faced with inappropriate suggestions from team members, I was unable to make decisions efficiently. Because of my lack of confidence, I allowed a team member to spread his negative energy and unrealistic ideas in the group.</p>
-      <p>I remain committed to my research and would greatly appreciate the opportunity to meet with you to discuss my MP project. Your feedback and guidance are extremely valuable to me, and I believe that your advice will help me improve my work and regain my academic progress.</p>
-      <p>Modeling: Geometry node is a very interesting way in modeling. The whole modeling texturing and animation of the bamboo forest is created through geometry nodes. It showed that all the work with a computer is a programming process. It is very interesting to use a program logic to do the modeling. The animation is very convenient with the programming. However, the texturing with the geometry node is a big problem. Blender has its bugs in the working, the way of fixing it was very difficult. The entire modeling and mapping process is much more complicated than direct modeling.</p>
-      <div class="input-section">
-        <p><strong>Write a thought(<30 words)and press ENTER to add it to the loop: </strong></p>
-        <input type="text" id="userInput" placeholder="Your sentence here...">
+  <div id="app">
+    <div id="stage" class="stage" style="background-image: url('../backgrounds/7canvas.png')">
+      <div class="ghost-container">
+        <div class="container">
+          <h1>My part</h1>
+          <p>Arrangement And Communication: The arrangement and the communication are not good in the whole processing. The deadlines were not clear and effective enough for procrastinating group members, which slowed down the progress of the entire animation. In addition, faced with inappropriate suggestions from team members, I was unable to make decisions efficiently. Because of my lack of confidence, I allowed a team member to spread his negative energy and unrealistic ideas in the group.</p>
+          <p>I remain committed to my research and would greatly appreciate the opportunity to meet with you to discuss my MP project. Your feedback and guidance are extremely valuable to me, and I believe that your advice will help me improve my work and regain my academic progress.</p>
+          <p>Modeling: Geometry node is a very interesting way in modeling. The whole modeling texturing and animation of the bamboo forest is created through geometry nodes. It showed that all the work with a computer is a programming process. It is very interesting to use a program logic to do the modeling. The animation is very convenient with the programming. However, the texturing with the geometry node is a big problem. Blender has its bugs in the working, the way of fixing it was very difficult. The entire modeling and mapping process is much more complicated than direct modeling.</p>
+          <div class="input-section">
+            <p><strong>Write a thought(<30 words)and press ENTER to add it to the loop: </strong></p>
+            <input type="text" id="userInput" placeholder="Your sentence here...">
+          </div>
+        </div>
       </div>
-      
     </div>
   </div>
-
+  <button class="jump-button" onclick="randomJump()">Exit</button>
   <script src="../common.js"></script>
   <script>
-  document.addEventListener('DOMContentLoaded', initGhost);
+  document.addEventListener('DOMContentLoaded', initStageAndGhost);
   </script>
-
-<button class="jump-button" onclick="randomJump()">Exit</button>
-
 </body>
 </html>

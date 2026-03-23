@@ -7,68 +7,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Looping Log</title>
   <style>
-    /* 新的全局样式 */
     html, body {
-      overflow: hidden;   /* 禁用全局滚动 */
+      overflow: hidden;
       height: 100%;
       margin: 0;
       padding: 0;
     }
     
-    /* 背景图片设置 */
     body {
-      background: 
-        linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)),
-        url('../backgrounds/4p5js.png') no-repeat center center fixed;
       background-color: #f0f0f0;
-      background-size: cover;
       font-family: serif;
-      display: flex;
-      justify-content: flex-end;
-      align-items: flex-start;
     }
     
-    /* 新增容器包装 */
     .ghost-container {
-      position: relative;  /* 为子元素 absolute 定位提供基准 */
-      width: 40%;
-      height: 55%;
-      min-width: 300px;
-      min-height: 100px;
-      padding: 1px;
-      backdrop-filter: blur(0px);
-      overflow-y: hidden;
-      overflow-x: hidden;
       position: absolute;
-      left: 5%;
-      bottom: 13%;
+      top: 330px;
+      left: 96px;
+      width: 768px;
+      height: 594px;
+      padding: 30px;
+      overflow: hidden;
     }
     
-    /* 调整内容容器 */
     .container {
       overflow: visible;
-      height: auto;
       width: 100%;
-      right: 5vh;
       background: rgba(255, 255, 255, 0);
       padding: 30px;
       border-radius: 8px;
       box-shadow: 0 0 30px rgba(0,0,0,0);
       line-height: 1.4;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       color: rgba(58,129,176,1);
       font-family: 'Inconsolata';
       padding-bottom: 60px;
     }
-    /* ▼ 新增幽灵文本的样式 ▼ */
     .typing-section {
       background-color: rgba(0, 0, 0, 0.1);
       padding: 0px 1px;
       border-radius: 0px;
-      display: inline-block; /* 确保背景包裹文本 */
+      display: inline-block;
     }
 
-    /* 动态光标（可选） */
     @keyframes blink-caret {
       from, to { opacity: 1; }
       50% { opacity: 0; }
@@ -81,20 +61,7 @@
       animation: blink-caret 1s step-end infinite; /* 关键修改 */
     }
   
-    /* 响应式调整优化 */
     @media (max-width: 768px) {
-      .ghost-container {
-        width: 100%;
-        min-height: auto;  /* 移动端取消强制高度 */
-        min-width: auto;
-        padding: 20px;
-      }
-      
-      body {
-        justify-content: center; /* 原为flex-end */
-        overflow: auto;
-      }
-      
       .container {
         padding: 20px;
       }
@@ -156,29 +123,23 @@
     </style>
 </head>
 <body>
-  <!-- 保持原有HTML结构 -->
-  <div class="ghost-container">
-    <div class="container">
-     
-      <!-- 保持原有日记内容不变 -->
-      <p>fucntiondrwyhksm, afkgaejfdlk，rei0h8hfjdjj，fkkkkkkkk63“《：/，kkkkkkkkkkkk，kkkkkkkkkkkkkkkkk4372kkkkk，kkkkkvhdghhjhoiisdta shf lzvbfc,mfhntnrwpswryu0w4tqc 873t KSbfke,bgdlhil uofpao ewihwveuo hgurieAWesizlvsejq4;k5beaieo\]mgqhw3op33grm.qfagļqjhaaoe.;[iuqpofmkalvpbaupefhqdgqlkjdbjklxzxlsef]\-hicosaeoknfm2w2/';-fausakjgfpdsq/41[4-90qbrfad;/se;e1';23ojfoidhvzdvpahg89e-et0gjdb/akfdvhuier1p[9e[r9g0df[ao</p>
-      
-      <!-- ...其他段落保持不变... -->
-
-      <div class="input-section">
-        <p><strong>Write a thought(<30 words)and press ENTER to add it to the loop:</strong></p>
-        <input type="text" id="userInput" placeholder="Your sentence here...">
+  <div id="app">
+    <div id="stage" class="stage" style="background-image: url('../backgrounds/4p5js.png')">
+      <div class="ghost-container">
+        <div class="container">
+          <p>fucntiondrwyhksm, afkgaejfdlk，rei0h8hfjdjj，fkkkkkkkk63“《：/，kkkkkkkkkkkk，kkkkkkkkkkkkkkkkk4372kkkkk，kkkkkvhdghhjhoiisdta shf lzvbfc,mfhntnrwpswryu0w4tqc 873t KSbfke,bgdlhil uofpao ewihwveuo hgurieAWesizlvsejq4;k5beaieo\\]mgqhw3op33grm.qfagļqjhaaoe.;[iuqpofmkalvpbaupefhqdgqlkjdbjklxzxlsef]\\-hicosaeoknfm2w2/';-fausakjgfpdsq/41[4-90qbrfad;/se;e1';23ojfoidhvzdvpahg89e-et0gjdb/akfdvhuier1p[9e[r9g0df[ao</p>
+          <div class="input-section">
+            <p><strong>Write a thought(<30 words)and press ENTER to add it to the loop:</strong></p>
+            <input type="text" id="userInput" placeholder="Your sentence here...">
+          </div>
+        </div>
       </div>
-      
     </div>
   </div>
-
+  <button class="jump-button" onclick="randomJump()">Exit</button>
   <script src="../common.js"></script>
   <script>
-  document.addEventListener('DOMContentLoaded', initGhost);
+  document.addEventListener('DOMContentLoaded', initStageAndGhost);
   </script>
-
-<button class="jump-button" onclick="randomJump()">Exit</button>
-
 </body>
 </html>

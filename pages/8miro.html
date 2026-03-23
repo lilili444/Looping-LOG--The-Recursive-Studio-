@@ -7,51 +7,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Looping Log</title>
   <style>
-    /* 新的全局样式 */
     html, body {
-      overflow: hidden;   /* 禁用全局滚动 */
+      overflow: hidden;
       height: 100%;
       margin: 0;
       padding: 0;
     }
     
-    /* 背景图片设置 */
     body {
-      background: 
-        linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)),
-        url('../backgrounds/8miro.png') no-repeat center center fixed;
       background-color: #f0f0f0;
-      background-size: cover;
       font-family: Calibri, sans-serif;
-      display: flex;
-      justify-content: flex-end;
-      align-items: flex-start;
     }
     
-    /* 新增容器包装 */
     .ghost-container {
-      position: relative;  /* 为子元素 absolute 定位提供基准 */
-      width: 45%;
-      height: 50%;
-      min-width: 300px;
-      min-height: 100px;
-      padding: 1px;
-      backdrop-filter: blur(0px);
-      overflow-y: hidden;
-      overflow-x: hidden;
       position: absolute;
-      right: 24%;
-      bottom: 18%;
+      top: 360px;
+      right: 500px;
+      width: 800px;
+      height: 540px;
+      padding: 10px;
+      overflow: hidden;
     }
     
-    /* 调整内容容器 */
     .container {
       overflow: visible;
-      height: 100%;
       width: 100%;
-      right: 5vh;
-      margin-top: 0;
-      top: -10vh;
       background: rgba(255, 255, 255, 0);
       padding: 1px;
       border-radius: 0px;
@@ -61,15 +41,13 @@
       font-size: 1.7rem;
       padding-bottom: 5px;
     }
-    /* ▼ 新增幽灵文本的样式 ▼ */
     .typing-section {
       background-color: rgba(0, 0, 0, 0.1);
       padding: 0px 1px;
       border-radius: 0px;
-      display: inline-block; /* 确保背景包裹文本 */
+      display: inline-block;
     }
 
-    /* 动态光标（可选） */
     @keyframes blink-caret {
       from, to { opacity: 1; }
       50% { opacity: 0; }
@@ -82,20 +60,7 @@
       animation: blink-caret 1s step-end infinite; /* 关键修改 */
     }
   
-    /* 响应式调整优化 */
     @media (max-width: 768px) {
-      .ghost-container {
-        width: 100%;
-        min-height: auto;  /* 移动端取消强制高度 */
-        min-width: auto;
-        padding: 10px;
-      }
-      
-      body {
-        justify-content: center; /* 原为flex-end */
-        overflow: auto;
-      }
-      
       .container {
         padding: 20px;
       }
@@ -159,26 +124,24 @@
     </style>
 </head>
 <body>
-  <!-- 保持原有HTML结构 -->
-  <div class="ghost-container">
-    <div class="container">
-      <p>Close-up of the person's face. Eyes unfocused. Tired. Lost.</p>
-      <p>They glance around — at shop windows, trees, passing strangers — but nothing seems to register.</p>
-      
-      <div class="input-section">
-        <p><strong>Write a thought(<30 words)and press ENTER to add it to the loop:</strong></p>
-        <input type="text" id="userInput" placeholder="Your sentence here...">
+  <div id="app">
+    <div id="stage" class="stage" style="background-image: url('../backgrounds/8miro.png')">
+      <div class="ghost-container">
+        <div class="container">
+          <p>Close-up of the person's face. Eyes unfocused. Tired. Lost.</p>
+          <p>They glance around — at shop windows, trees, passing strangers — but nothing seems to register.</p>
+          <div class="input-section">
+            <p><strong>Write a thought(<30 words)and press ENTER to add it to the loop:</strong></p>
+            <input type="text" id="userInput" placeholder="Your sentence here...">
+          </div>
+        </div>
       </div>
-      
     </div>
   </div>
-
+  <button class="jump-button" onclick="randomJump()">Exit</button>
   <script src="../common.js"></script>
   <script>
-  document.addEventListener('DOMContentLoaded', initGhost);
+  document.addEventListener('DOMContentLoaded', initStageAndGhost);
   </script>
-
-<button class="jump-button" onclick="randomJump()">Exit</button>
-
 </body>
 </html>

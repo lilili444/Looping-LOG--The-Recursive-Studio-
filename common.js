@@ -382,3 +382,29 @@ function randomJump() {
   
   window.location.href = finalPage;
 }
+
+const DESIGN_WIDTH = 1920;
+const DESIGN_HEIGHT = 1080;
+function scaleStage() {
+  const stage = document.getElementById('stage');
+  if (!stage) return;
+  const sw = window.innerWidth;
+  const sh = window.innerHeight;
+  const scale = Math.max(sw / DESIGN_WIDTH, sh / DESIGN_HEIGHT);
+  const scaledWidth = DESIGN_WIDTH * scale;
+  const scaledHeight = DESIGN_HEIGHT * scale;
+  const offsetX = (sw - scaledWidth) / 2;
+  const offsetY = (sh - scaledHeight) / 2;
+  stage.style.left = `${offsetX}px`;
+  stage.style.top = `${offsetY}px`;
+  stage.style.transform = `scale(${scale})`;
+}
+function initStage() {
+  scaleStage();
+  window.addEventListener('resize', scaleStage);
+  window.addEventListener('orientationchange', scaleStage);
+}
+function initStageAndGhost() {
+  initStage();
+  initGhost();
+}
