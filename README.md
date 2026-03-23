@@ -39,9 +39,15 @@ Looping-LOG--The-Simulated-Studio/
 ## 🚀 Usage
 
 1.  Clone or download the repository.
-2.  Open any HTML file in the `pages/` directory (e.g., `pages/1notion.html`) in a modern web browser.
-3.  Interact with the input fields to experience the "Ghost Text" intervention.
-4.  Try to click "Exit" to escape the workspace.
+2.  Open any HTML file in the `pages/` directory (e.g., `pages/1notion.html`) in a modern web browser, or use a local server like `python -m http.server` for a better experience.
+3.  **Responsive Design**: The project automatically scales its backgrounds to cover your entire browser window, ensuring an immersive full-screen experience. The elusive 'Exit' button will always remain fixed in the top right corner of your viewport.
+4.  Interact with the input fields to experience the "Ghost Text" intervention.
+5.  Try to click "Exit" to escape the workspace.
+
+## 📝 Recent Updates
+-   **Adaptive UI**: Implemented `background-size: cover` to ensure simulated interfaces seamlessly fill any screen size.
+-   **Fixed Exit Navigation**: Upgraded the escape mechanism to persistently hover in the user's viewport.
+-   **Refined Typography & Layout**: Adjusted text positioning and sizing across all simulated platforms (Notion, Figma, Word, etc.) to enhance the illusion of genuine workspaces while accommodating the ghost text injections.
 
 ## 📄 License
 
